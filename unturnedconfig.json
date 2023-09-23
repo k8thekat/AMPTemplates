@@ -42,19 +42,6 @@
         "EnumValues":{}
     },
     {
-        "DisplayName": "RCON Password",
-        "Category": "Server Settings",
-        "Description": "",
-        "Keywords": "",
-        "FieldName": "$RemoteAdminPassword",
-        "InputType": "text",
-        "IsFlagArgument": false,
-        "Hidden":true,
-        "ParamFieldName": "/RocketSettings/RCON/@Password",
-        "IncludeInCommandLine": false,
-        "EnumValues":{}
-    },
-    {
         "DisplayName": "Server Name",
         "Category": "Server Settings",
         "Description": "Sets the name of the server shown publicly",
@@ -89,11 +76,23 @@
         "Description": "Password to connect to the server. Default is no password",
         "Keywords": "password",
         "FieldName": "Password",
-        "InputType": "RandomPassword",
+        "InputType": "password",
         "IsFlagArgument": false,
         "ParamFieldName": "Password",
         "IncludeInCommandLine": false,
         "DefaultValue": "",
+        "EnumValues":{}
+    },
+    {
+        "DisplayName": "RCON Password",
+        "Category": "Server Settings",
+        "Description": "See the Security and Privacy menu for configurable options for the server's RCON",
+        "Keywords": "rcon,password",
+        "FieldName": "$RemoteAdminPassword",
+        "InputType": "hidden",
+        "IsFlagArgument": false,
+        "ParamFieldName": "/RocketSettings/RCON/@Password",
+        "IncludeInCommandLine": false,
         "EnumValues":{}
     },
     {
@@ -147,19 +146,46 @@
         "IncludeInCommandLine": false,
         "DefaultValue": "10",
         "Suffix": "players",
-        "EnumValues":{}
+        "EnumValues":{},
+        "MinValue":"1"
     },
     {
         "DisplayName": "Map",
         "Category": "Server Settings",
-        "Description": "Sets the map",
+        "Description": "Sets the map for the server. If Custom is selected, Custom Map Name must also be set",
         "Keywords": "map",
         "FieldName": "Map",
-        "InputType": "text",
+        "InputType": "enum",
         "IsFlagArgument": false,
         "ParamFieldName": "Map",
         "IncludeInCommandLine": false,
         "DefaultValue": "PEI",
+        "EnumValues":{
+            "Alpha Valley":"Alpha Valley (Arena)",
+            "Germany":"Germany",
+            "Monolith":"Monolith (Arena)",
+            "Paintball Arena":"Paintball Arena",
+            "PEI":"PEI (default)",
+            "PEI Arena":"PEI Arena",
+            "Russia":"Russia",
+            "Washington":"Washington",
+            "Washington Arena":"Washington Arena",
+            "Yukon":"Yukon",
+            "{{CustomMap}}":"Custom"
+        }
+    },
+    {
+        "DisplayName":"Custom Map Name",
+        "Category":"Server Settings",
+        "Description":"Sets a custom map name for the server. \"Custom\" type must be selected under Map, and the map files must be installed via Workshop Items",
+        "Keywords":"custom,map",
+        "FieldName":"CustomMap",
+        "InputType":"text",
+        "IsFlagArgument":false,
+        "ParamFieldName":"CustomMap",
+        "IncludeInCommandLine":false,
+        "DefaultValue":"",
+        "Placeholder":"Hawaii",
         "EnumValues":{}
     },
     {

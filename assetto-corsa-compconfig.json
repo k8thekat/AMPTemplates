@@ -89,7 +89,8 @@
         "IncludeInCommandLine":false,
         "DefaultValue":"85",
         "Suffix":"connections",
-        "EnumValues":{}
+        "EnumValues":{},
+        "MinValue":"1"
     },
     {
         "DisplayName":"Player Limit",
@@ -229,6 +230,7 @@
             "snetterton":"Snetterton",
             "spa":"Spa",
             "suzuka":"Suzuka",
+            "valencia":"Valencia",
             "zandvoort":"Zandvoort",
             "zolder":"Zolder"
         }

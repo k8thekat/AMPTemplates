@@ -92,7 +92,8 @@
         "IncludeInCommandLine":true,
         "SkipIfEmpty":true,
         "DefaultValue":"10",
-        "EnumValues":{}
+        "EnumValues":{},
+        "MinValue":"1"
     },
     {
         "DisplayName":"Load Mode",
@@ -252,6 +253,23 @@
         "EnumValues":{
             "True":"true",
             "False":"false"
+        }
+    },
+    {
+        "DisplayName":"Server Branch",
+        "Category":"SteamCMD and Updates",
+        "Description":"Sets the server branch to install. The client must be on the same version. NOTE: Update the server after switching branches!",
+        "Keywords":"server,branch,depot",
+        "FieldName":"ServerBranch",
+        "InputType":"enum",
+        "IsFlagArgument":false,
+        "ParamFieldName":"ServerBranch",
+        "IncludeInCommandLine":false,
+        "DefaultValue":"public",
+        "EnumValues":{
+            "public":"Public (default)",
+            "beta":"Beta",
+            "previous":"Previous"
         }
     }
 ]

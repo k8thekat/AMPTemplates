@@ -10,7 +10,6 @@
         "Hidden":true,
         "ParamFieldName":"URL.Port",
         "IncludeInCommandLine":false,
-        "DefaultValue":"7777"
     },
     {
         "DisplayName":"Download Port Offset",
@@ -36,7 +35,6 @@
         "Hidden":true,
         "ParamFieldName":"OnlineSubsystemNull.GameServerQueryPort",
         "IncludeInCommandLine":false,
-        "DefaultValue":"27015"
     },
     {
         "DisplayName":"RCON Port",
@@ -49,8 +47,8 @@
         "Hidden":true,
         "ParamFieldName":"RconPlugin.RconPort",
         "IncludeInCommandLine":false,
-        "DefaultValue":"25575"
-    },{
+    },
+    {
         "DisplayName":"Server Name",
         "Category":"Server Settings",
         "Description":"Name of the server shown in the server browser.",
@@ -75,8 +73,8 @@
         "IncludeInCommandLine":false,
         "DefaultValue":"/Game/Maps/ConanSandbox/ConanSandbox",
         "EnumValues":{
-            "":"Custom",
-            "/Game/Maps/ConanSandbox/ConanSandbox":"Exiled Lands",
+            "{{CustomMap}}":"Custom",
+            "/Game/Maps/ConanSandbox/ConanSandbox":"Exiled Lands (default)",
             "/Game/DLC_EXT/DLC_Siptah/Maps/DLC_Isle_of_Siptah":"Isle of Siptah"
         }
     },
@@ -106,7 +104,8 @@
         "IncludeInCommandLine":false,
         "DefaultValue":"40",
         "Suffix":"players",
-        "EnumValues":{}
+        "EnumValues":{},
+        "MinValue":"1"
     },
     {
         "DisplayName":"Server Password",
@@ -125,29 +124,26 @@
     {
         "DisplayName":"Admin Password",
         "Category":"Server Settings",
-        "Description":"In-game \"admin\" user password (not the server password). NOTE: You must set this to allow use of the in-game admin panel. Change this after installing the server!",
+        "Description":"To allow use of the in-game admin panel, set the \"admin\" user password in ConanSandbox/Saved/Config/WindowsServer/ServerSettings.ini. Add the setting on a new line immediately after the [ServerSettings] header, in the format: AdminPassword=yourpassword",
         "Keywords":"admin,password",
         "FieldName":"AdminPassword",
-        "InputType":"RandomPassword",
+        "InputType":"hidden",
         "IsFlagArgument":false,
-        "ParamFieldName":"ServerSettings.AdminPassword",
+        "ParamFieldName":"AdminPassword",
         "IncludeInCommandLine":false,
-        "DefaultValue":"Password123",
-        "Required": true,
         "EnumValues":{}
     },
     {
         "DisplayName":"RCON Password",
         "Category":"Server Settings",
-        "Description":"Password to connect to RCON.",
+        "Description":"See the Security and Privacy menu for configurable options for the server's RCON.",
         "Keywords":"rcon,password",
         "FieldName":"$RemoteAdminPassword",
-        "InputType":"password",
+        "InputType":"hidden",
         "IsFlagArgument":false,
         "ParamFieldName":"RconPlugin.RconPassword",
         "IncludeInCommandLine":false,
-        "EnumValues":{},
-        "Hidden": true
+        "EnumValues":{}
     },
     {
         "DisplayName":"Server Region",
@@ -200,5 +196,18 @@
             "True":"True",
             "False":"False"
         }
+    },
+    {
+        "DisplayName":"Mods List",
+        "Category":"Server Settings",
+        "Description":"Mods must be entered into \"Steam workshop items\" in the SteamCMD and Updates tab. Update the game server to download the mods to the ConanSandbox\\Mods\\ directory. Inside each folder there will be a .pak file. Enter the WorkshopID\\PakFileName.pak: 2377569193\\Savage_Wilds.pak",
+        "Keywords":"workshop,mod,list",
+        "FieldName":"ModList",
+        "InputType":"list",
+        "IsFlagArgument":false,
+        "ParamFieldName":"ModList",
+        "DefaultValue":"",
+        "Special":"listfile:./conan-exiles/443030/ConanSandbox/Mods/modlist.txt",
+        "EnumValues":{}
     }
  ]
