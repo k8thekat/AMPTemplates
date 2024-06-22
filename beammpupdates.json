@@ -4,7 +4,8 @@
         "UpdateSourcePlatform":"Linux",
         "UpdateSource":"Executable",
         "UpdateSourceData":"/bin/bash",
-        "UpdateSourceArgs":"-c 'rm {{$FullBaseDir}}BeamMP-Server*'"
+        "UpdateSourceArgs":"-c 'rm {{$FullBaseDir}}BeamMP-Server* >/dev/null 2>&1'",
+        "SkipOnFailure":true
     },
     {
         "UpdateStageName":"BeamMP Download",
@@ -20,8 +21,20 @@
         "UpdateStageName":"BeamMP Download",
         "UpdateSourcePlatform":"Linux",
         "UpdateSource":"GithubRelease",
-        "UpdateSourceData":"BeamMP-Server-{{ServerVersion}}",
+        "UpdateSourceData":"BeamMP-Server.{{ServerVersion}}.x86_64",
         "UpdateSourceArgs":"BeamMP/BeamMP-Server",
+        "UpdateSourceArch":"x86_64",
+        "UpdateSourceTarget":"{{$FullBaseDir}}",
+        "UnzipUpdateSource":false,
+        "OverwriteExistingFiles":true
+    },
+    {
+        "UpdateStageName":"BeamMP Download",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"GithubRelease",
+        "UpdateSourceData":"BeamMP-Server.{{ServerVersion}}.arm64",
+        "UpdateSourceArgs":"BeamMP/BeamMP-Server",
+        "UpdateSourceArch":"aarch64",
         "UpdateSourceTarget":"{{$FullBaseDir}}",
         "UnzipUpdateSource":false,
         "OverwriteExistingFiles":true
@@ -30,14 +43,33 @@
         "UpdateStageName":"Set Executable Flag",
         "UpdateSourcePlatform":"Linux",
         "UpdateSource":"SetExecutableFlag",
-        "UpdateSourceArgs":"{{$FullBaseDir}}BeamMP-Server-{{ServerVersion}}"
+        "UpdateSourceArgs":"{{$FullBaseDir}}BeamMP-Server.{{ServerVersion}}.x86_64",
+        "UpdateSourceArch":"x86_64"
+    },
+    {
+        "UpdateStageName":"Set Executable Flag",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"SetExecutableFlag",
+        "UpdateSourceArgs":"{{$FullBaseDir}}BeamMP-Server.{{ServerVersion}}.arm64",
+        "UpdateSourceArch":"aarch64"
+    },
+     {
+        "UpdateStageName":"Binary Symlink Creation",
+        "UpdateSourcePlatform":"Linux",
+        "UpdateSource":"Executable",
+        "UpdateSourceData":"/bin/bash",
+        "UpdateSourceArgs":"-c 'cd ./beammp/serverfiles/ && ln -s BeamMP-Server.{{ServerVersion}}.x86_64 BeamMP-Server'",
+        "UpdateSourceArch":"x86_64",
+        "SkipOnFailure":false
     },
     {
         "UpdateStageName":"Binary Symlink Creation",
         "UpdateSourcePlatform":"Linux",
         "UpdateSource":"Executable",
         "UpdateSourceData":"/bin/bash",
-        "UpdateSourceArgs":"-c 'cd ./beammp/serverfiles/ && ln -s BeamMP-Server-{{ServerVersion}} BeamMP-Server'"
+        "UpdateSourceArgs":"-c 'cd ./beammp/serverfiles/ && ln -s BeamMP-Server.{{ServerVersion}}.arm64 BeamMP-Server'",
+        "UpdateSourceArch":"aarch64",
+        "SkipOnFailure":false
     },
     {
         "UpdateStageName":"Config File Download",

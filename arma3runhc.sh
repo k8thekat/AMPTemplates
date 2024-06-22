@@ -19,13 +19,13 @@ for i in $(seq 1 180); do
   sleep 1
 done
 if ! $server_started; then
-  exit 1
+  exit 0
 fi
 
 # Start the headless clients
 baseport=$(($3 + 498))
 parfile="${6:-}"
-export LD_LIBRARY_PATH=$(dirname "$0")/linux64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$(dirname "$0")/arma3/linux64:$LD_LIBRARY_PATH
 cd ./arma3/233780
 for i in $(seq 1 "$1"); do
   if [[ "$2" == "0.0.0.0" ]]; then
@@ -38,13 +38,14 @@ for i in $(seq 1 "$1"); do
 done
 
 # Monitor server process and terminate headless clients
-# when server terminates
-trap 'kill "${clients[@]}" >/dev/null 2>&1' SIGTERM
+# when server terminates or SIGTERM/SIGINT received
+trap 'for client in "${clients[@]}"; do kill "$client" >/dev/null 2>&1; done; wait' SIGTERM SIGINT
 while true; do
   if ! $netcommand -uln | grep -q ":$3 "; then
     for client in "${clients[@]}"; do
       kill "$client" >/dev/null 2>&1
     done
+    wait
     exit 0
   fi
   sleep 1

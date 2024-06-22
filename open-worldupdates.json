@@ -100,7 +100,8 @@
         "UpdateSource":"Executable",
         "UpdateSourceData":"/bin/bash",
         "UpdateSourceArgs":"-c '\\cp -rf ./open-world/linux-x64/* ./open-world/server/ && chmod +x ./open-world/server/OpenWorldServer ; rm -rf ./open-world/linux-x64/'",
-        "UpdateSourceArch":"x86_64"
+        "UpdateSourceArch":"x86_64",
+        "SkipOnFailure":false
     },
     {
         "UpdateStageName":"Move Server Files",
@@ -108,7 +109,8 @@
         "UpdateSource":"Executable",
         "UpdateSourceData":"/bin/bash",
         "UpdateSourceArgs":"-c '\\cp -rf ./open-world/linux-arm64/* ./open-world/server/ && chmod +x ./open-world/server/OpenWorldServer ; rm -rf ./open-world/linux-arm64/'",
-        "UpdateSourceArch":"aarch64"
+        "UpdateSourceArch":"aarch64",
+        "SkipOnFailure":false
     },
     {
         "UpdateStageName":"Config.json File Download",
@@ -120,21 +122,18 @@
         "OverwriteExistingFiles":false
     },
     {
-        "UpdateStageName":"Deep Config.json File Download",
+        "UpdateStageName":"Start Server",
         "UpdateSourcePlatform":"All",
-        "UpdateSource":"FetchURL",
-        "UpdateSourceData":"https://raw.githubusercontent.com/CubeCoders/AMPTemplates/main/open-worldserverdeepconfig.json",
-        "UpdateSourceArgs":"Deep Config.json",
-        "UpdateSourceTarget":"{{$FullBaseDir}}Data",
-        "OverwriteExistingFiles":false
+        "UpdateSource":"StartApplication"
     },
     {
-        "UpdateStageName":"Values.json File Download",
+        "UpdateStageName":"Wait For Server Start",
         "UpdateSourcePlatform":"All",
-        "UpdateSource":"FetchURL",
-        "UpdateSourceData":"https://raw.githubusercontent.com/CubeCoders/AMPTemplates/main/open-worldservervalues.json",
-        "UpdateSourceArgs":"Values.json",
-        "UpdateSourceTarget":"{{$FullBaseDir}}Data",
-        "OverwriteExistingFiles":false
+        "UpdateSource":"WaitForStartupComplete"
+    },
+    {
+        "UpdateStageName":"Stop Server",
+        "UpdateSourcePlatform":"All",
+        "UpdateSource":"ShutdownApplication"
     }
 ]
